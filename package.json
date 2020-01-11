@@ -1,9 +1,13 @@
 {
     "name": "tree-editable",
     "version": "1.0.0",
-    "description": "a simple, editable and draggable tree component",
+    "description": "A simple, editable and draggable tree component",
     "main": "./lib/TreeEditable.js",
     "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ollieloney95/tree-editable"
+    },
     "scripts": {
         "build": "webpack",
         "storybook": "start-storybook -p 9009 -s public"
