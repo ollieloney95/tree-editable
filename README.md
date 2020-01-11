@@ -3,6 +3,8 @@
 This package is a light-weight customizable tree component.
 The tree nodes can be editable and draggable.
 
+![](example.gif)
+
 ## Installation
 
     npm install tree-editable
