@@ -1,6 +1,6 @@
 {
     "name": "tree-editable",
-    "version": "1.0.0",
+    "version": "1.0.01",
     "description": "A simple, editable and draggable tree component",
     "main": "./lib/TreeEditable.js",
     "license": "MIT",
