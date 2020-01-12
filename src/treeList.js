@@ -1,5 +1,4 @@
 import React, {useState, useRef, useEffect} from 'react';
-import './treeList.css'
 import { LeafIcon as DefaultLeafIcon,
          OpenIcon as DefaultOpenIcon,
          CloseIcon as DefaultCloseIcon,
@@ -7,6 +6,7 @@ import { LeafIcon as DefaultLeafIcon,
     } from './defaults'
 import { inputToNode, Node, onDrop, hovering } from './node'
 import PropTypes from 'prop-types';
+import { useHover } from './helperHooks';
 
 
 function Icon(props){
@@ -64,7 +64,7 @@ export default function TreeList(props) {
       }
 
       return (
-        <div class="outerBox">
+        <div style={{border:'1px solid grey', borderRadius:'4px'}}>
             {nodes && <DisplayNode node={nodes} onDragOver={onDragOver} onDragEnd={onDragEnd} onDragStart={onDragStart} onClick={onClick} LeafIcon={props.LeafIcon} OpenIcon={props.OpenIcon} CloseIcon={props.CloseIcon} Divider={props.Divider} editable={props.editable}/>}
         </div>
       );
@@ -80,10 +80,14 @@ function DisplayNode(props) {
 
     const forceUpdate = useForceUpdate();
     let {node, onDragOver, onDragEnd, onClick, onDragStart, LeafIcon, OpenIcon, CloseIcon, Divider, editable} = props
-    let children = (<ul class='list'>{node.children.map((child, i) => <DisplayNode node={child} onDragOver={onDragOver} onDragEnd={onDragEnd} onDragStart={onDragStart} onClick={onClick} LeafIcon={LeafIcon} OpenIcon={OpenIcon} CloseIcon={CloseIcon} editable={editable}/> )}</ul>)
+    let children = (<ul style={{listStyleType:'none', margin:'0'}}>{node.children.map((child, i) => <DisplayNode node={child} onDragOver={onDragOver} onDragEnd={onDragEnd} onDragStart={onDragStart} onClick={onClick} LeafIcon={LeafIcon} OpenIcon={OpenIcon} CloseIcon={CloseIcon} editable={editable}/> )}</ul>)
     let openNoDrag = node.open && !node.dragging
     Divider = Divider || DefaultDivider
     const ref = useRef();
+    const [hoverRef, isHovered] = useHover();
+
+    // TODO make this hover a state like :hover
+    let hover = false
 
     useEffect(() => {
         // TODO - only update position on click change
@@ -101,10 +105,12 @@ function DisplayNode(props) {
             onClick={onClick}
        >
          <div style={{height:(node.hovering === hovering.ABOVE) ? '4px' : '4px', backgroundColor:(node.hovering === hovering.ABOVE) ? 'rgba(3, 248, 252, 0.3)' : 'rgba(255, 255, 255, 0)'}}></div>
-          <li class='list-item' button key={node.name}
+          <li style={{height:'25px', margin:'0px', backgroundColor:isHovered?'rgba(200,200,200,0.3)':'rgba(1,1,1,0)'}}
+                  button key={node.name}
+                  ref={hoverRef}
                   onClick={(e)=>{node.open = !node.open ; forceUpdate()}}>
-              <Icon class='item-icon' isLeaf={node.children.length === 0} open={openNoDrag} CloseIcon={CloseIcon} OpenIcon={OpenIcon} LeafIcon={LeafIcon}/>
-              <p class='item-text'>{node.name}</p>
+              <Icon style={{display:'inline-block', verticalAlign:'top'}} isLeaf={node.children.length === 0} open={openNoDrag} CloseIcon={CloseIcon} OpenIcon={OpenIcon} LeafIcon={LeafIcon}/>
+              <p style={{display:'inline-block', verticalAlign:'top', margin:'4px', fontSize:'18px'}}>{node.name}</p>
           </li>
           <div style={{height:(node.hovering === hovering.ABOVE) ? '4px' : '4px', backgroundColor:(node.hovering === hovering.BELOW) ? 'rgba(3, 248, 252, 0.3)' : 'rgba(255, 255, 255, 0)'}}></div>
             {(openNoDrag && node.children.length>0) ? <Divider />: null}

@@ -1,4 +1,5 @@
 demo
 .babelrc
 src/stories
+example.gif
 webpack.config.js

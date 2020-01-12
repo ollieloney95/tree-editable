@@ -1,7 +1,7 @@
 import React from 'react';
 
 export function Divider(props){
-    return (<div class='divider'></div>)
+    return (<div style={{height:'1px', backgroundColor:'rgba(200, 200, 200, 1.0)'}}></div>)
 }
 
 export function OpenIcon(){
