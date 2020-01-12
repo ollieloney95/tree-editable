@@ -11,19 +11,23 @@ module.exports = {
         libraryTarget: 'commonjs2'
     },
     plugins: [new MiniCssExtractPlugin()],
+    externals: {
+            'react': 'React',
+            'react-dom': 'ReactDOM'
+        },
     module: {
 	rules: [
-          {
-            test: /\.js$/,
-            exclude: /node_modules/,
-            use: {
-              loader: "babel-loader"
-            }
-          },
-          {
-            test: /\.css$/i,
-            use: [MiniCssExtractPlugin.loader, 'css-loader'],
-          }
-        ]
+              {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                  loader: "babel-loader"
+                }
+              },
+              {
+                test: /\.css$/i,
+                use: [MiniCssExtractPlugin.loader, 'css-loader'],
+              }
+           ]
     }
 }

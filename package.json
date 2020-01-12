@@ -1,6 +1,6 @@
 {
     "name": "tree-editable",
-    "version": "1.0.04",
+    "version": "1.0.05",
     "description": "A simple, editable and draggable tree component",
     "main": "./lib/TreeEditable.js",
     "license": "MIT",
@@ -22,7 +22,6 @@
         "storybook": "start-storybook -p 9009 -s public"
     },
     "peerDependencies": {
-        "prop-types": "^15.6.0",
         "react": "^16.0.0",
         "react-dom": "^16.0.0"
     },
@@ -47,6 +46,7 @@
         "webpack-cli": "^3.2.1"
     },
     "dependencies": {
-        "lodash": "^4.17.15"
+        "lodash": "^4.17.15",
+        "prop-types": "^15.7.2"
     }
 }
