@@ -1,6 +1,6 @@
 {
     "name": "tree-editable",
-    "version": "1.0.02",
+    "version": "1.0.04",
     "description": "A simple, editable and draggable tree component",
     "main": "./lib/TreeEditable.js",
     "license": "MIT",
@@ -45,5 +45,8 @@
         "style-loader": "^1.1.2",
         "webpack": "^4.5.0",
         "webpack-cli": "^3.2.1"
+    },
+    "dependencies": {
+        "lodash": "^4.17.15"
     }
 }
